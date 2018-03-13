@@ -53,20 +53,22 @@ https://developer.godaddy.com/keys/.
 Note that command line arguments may be specified in a FILE, one to a line, by instead giving
 the argument "%FILE".  For security reasons, it is particularly recommended to supply the 
 KEY and SECRET arguments in such a file, rather than directly on the command line.''')
-
+my_keys=os.getenv('KEY')
+my_secret=os.getenv('SECRET')
+my_hostname=os.getenv('DOMAIN')
 parser.add_argument('--version', action='version',
   version='{} {}'.format(prog, version))
 
-parser.add_argument('hostname', type=str,
+parser.add_argument('hostname', type=str, default=my_hostname,
   help='DNS fully-qualified host name with an A record')
 
 parser.add_argument('--ip', type=str, default=None,
   help='DNS Address (defaults to public WAN address from http://ipv4.icanhazip.com/)')
 
-parser.add_argument('--key', type=str, default='',
+parser.add_argument('--key', type=str, default=my_key,
   help='GoDaddy production key')
 
-parser.add_argument('--secret', type=str, default='',
+parser.add_argument('--secret', type=str, default=my_secret,
   help='GoDaddy production secret')
 
 parser.add_argument('--ttl', type=int, default=3600 , help='DNS TTL.')
